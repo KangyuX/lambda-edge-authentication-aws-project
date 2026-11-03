@@ -5,17 +5,6 @@ A static website on AWS that only signed-in users can see. The site files sit in
 Every file on the site is behind sign-in, including the CSS, JavaScript and 404 page.
 
 ## Architecture
-
-```mermaid
-flowchart LR
-    U[Browser] -->|HTTPS| CF[CloudFront]
-    CF -->|viewer request| L[Lambda@Edge<br/>auth check]
-    L -->|no session| C[Cognito<br/>hosted sign-in]
-    C -->|"?code=..."| CF
-    L -.->|reads settings once| P[SSM Parameter Store]
-    CF -->|signed in| S3[(Private S3 bucket)]
-```
-
 | Piece | What it does |
 | --- | --- |
 | **S3** | Holds the static files in `site/`. Public access is blocked, the bucket is encrypted, and only this CloudFront distribution can read it (Origin Access Control). |
