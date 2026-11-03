@@ -1,0 +1,8 @@
+{
+  "name": "s3-cloudfront-app-auth",
+  "private": true,
+  "description": "Lambda@Edge viewer-request function that gates the site behind Cognito (cognito-at-edge). Packaged by the Dockerfile, which Terraform runs.",
+  "dependencies": {
+    "cognito-at-edge": "1.5.5"
+  }
+}
